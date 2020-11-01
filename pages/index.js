@@ -1,12 +1,12 @@
-import styles from './Home.module.scss'
+import Typography from '@material-ui/core/Typography'
 import Layout from '../layouts/default'
 
 export default function Home() {
   return (
-    <div className={styles.container}>
-      <Layout meta_title="codedoct-react-nuxt">
-        <h1>First Post</h1>
-      </Layout>
-    </div>
+    <Layout meta_title="codedoct-react-nuxt">
+      <Typography paragraph>
+        Welcome to codedoct
+      </Typography>
+    </Layout>
   )
 }
