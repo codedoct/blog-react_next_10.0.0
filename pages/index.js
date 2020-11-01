@@ -1,7 +1,7 @@
 import Typography from '@material-ui/core/Typography'
-import Layout from '../layouts/default'
+import Layout from '~/layouts/default'
 
-export default function Home() {
+const Home = () => {
   return (
     <Layout meta_title="codedoct-react-nuxt">
       <Typography paragraph>
@@ -10,3 +10,5 @@ export default function Home() {
     </Layout>
   )
 }
+
+export default Home
