@@ -28,7 +28,7 @@ const News = () => {
         List News
         <List component="nav" aria-label="secondary mailbox folders">
           {news.docs.map((data, index) => (
-            <ListItemLink href="#" key={index}>
+            <ListItemLink href={`news/${data.id}`} key={index}>
               <ListItemText primary={data.title} />
             </ListItemLink>
           ))}
