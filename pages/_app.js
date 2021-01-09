@@ -1,4 +1,5 @@
 import React from 'react'
+import { wrapper } from '../store'
 import Head from 'next/head'
 import { ThemeProvider } from '@material-ui/core/styles'
 import { StylesProvider } from '@material-ui/styles'
@@ -20,7 +21,6 @@ const MyApp = ({ Component, pageProps }) => {
     <>
       <Head>
         <title>Put your title here</title>
-        <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
       <ThemeProvider theme={theme}>
@@ -33,9 +33,16 @@ const MyApp = ({ Component, pageProps }) => {
   )
 }
 
-MyApp.propTypes = {
-  Component: PropTypes.elementType.isRequired,
-  pageProps: PropTypes.object.isRequired
+MyApp.getInitialProps = async ({Component, ctx}) => {
+  const pageProps = Component.getInitialProps
+    ? await Component.getInitialProps(ctx)
+    : {}
+
+  return { pageProps }
 }
 
-export default MyApp
+MyApp.propTypes = {
+  Component: PropTypes.elementType.isRequired
+}
+
+export default wrapper.withRedux(MyApp)
