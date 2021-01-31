@@ -31,7 +31,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-push": "make run_lint"
+      "pre-push": "./node_modules/.bin/eslint ."
     }
   }
 }
