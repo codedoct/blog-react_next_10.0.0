@@ -6,21 +6,11 @@ const Form = () => {
   const { handleSubmit, errors, control } = useForm() // initialize the hook
 
   const onSubmit = async (value) => {
-    console.log('masuk', value)
-    // try {
-    //   await apiPostNonAuth(API_LEADS.CREATE, {
-    //     product_id: value.listProduct,
-    //     name: value.fullname,
-    //     dob: dateString(dob),
-    //     email: value.email,
-    //     phone: value.phone,
-    //     i_am_using: value.listCard,
-    //     description: value.message
-    //   })
-    //   Swal.fire({icon: 'success', title: 'Success', text: "Kami akan menghubungi kamu."})
-    // } catch (err) {
-    //   console.log(err.response)
-    // }
+    const data = {
+      email: value.email,
+      password: value.password
+    }
+    console.log('masuk', data)
   }
 
   return (
