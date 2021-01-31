@@ -5,7 +5,7 @@ import { ThemeProvider } from '@material-ui/core/styles'
 import { StylesProvider } from '@material-ui/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import theme from '../styles/theme'
-import '../styles/globals.css'
+import '../styles/globals.scss'
 import PropTypes from 'prop-types'
 
 const MyApp = ({ Component, pageProps }) => {

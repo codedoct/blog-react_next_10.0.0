@@ -24,16 +24,14 @@ const News = () => {
 
   return (
     <Layout meta_title="codedoct-react-nuxt">
-      <Typography paragraph>
-        List News
-        <List component="nav" aria-label="secondary mailbox folders">
-          {news.docs.map((data, index) => (
-            <ListItemLink href={`news/${data.id}`} key={index}>
-              <ListItemText primary={data.title} />
-            </ListItemLink>
-          ))}
-        </List>
-      </Typography>
+      <Typography paragraph className="font-title">List News</Typography>
+      <List component="nav" aria-label="secondary mailbox folders">
+        {news.docs.map((data, index) => (
+          <ListItemLink href={`news/${data.id}`} key={index}>
+            <ListItemText primary={data.title} />
+          </ListItemLink>
+        ))}
+      </List>
     </Layout>
   )
 }

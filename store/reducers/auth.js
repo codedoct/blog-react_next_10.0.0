@@ -1,6 +1,5 @@
 import {HYDRATE} from 'next-redux-wrapper'
 
-// create your reducer
 const reducer = (state = {}, action) => {
   switch (action.type) {
   case HYDRATE:

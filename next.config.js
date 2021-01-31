@@ -13,5 +13,11 @@ module.exports = {
     config.resolve.alias['~'] = path.join(__dirname, './')
 
     return config
+  },
+
+  sassOptions: {
+    prependData: `
+      @import "~/styles/_variables.scss";
+    `
   }
 }
