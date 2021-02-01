@@ -9,6 +9,7 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import PersonIcon from '@material-ui/icons/Person'
+import { useRouter } from 'next/router'
 
 const drawerWidth = 240
 
@@ -31,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const GlobalDrawer = ({handleDrawerClose, open}) => {
+  const router = useRouter()
   const classes = useStyles()
   const theme = useTheme()
 
@@ -51,9 +53,9 @@ const GlobalDrawer = ({handleDrawerClose, open}) => {
       </div>
       <Divider />
       <List>
-        <ListItem button>
+        <ListItem button onClick={() => router.push("/auth/login")}>
           <ListItemIcon><PersonIcon /></ListItemIcon>
-          <ListItemText primary="Profile" />
+          <ListItemText primary="Login" />
         </ListItem>
       </List>
     </Drawer>
