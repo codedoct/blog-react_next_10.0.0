@@ -1,4 +1,5 @@
-import Typography from '@material-ui/core/Typography'
+import { Typography } from '@material-ui/core'
+import Link from 'next/link'
 import Layout from '~/layouts/default'
 import { connect } from 'react-redux'
 // import {wrapper} from '~/store'
@@ -17,6 +18,9 @@ const Register = ({auth}) => {
     <Layout meta_title="codedoct-react-nuxt">
       <Typography paragraph className="font-title">Register</Typography>
       <Form />
+      <div className="mt-2">
+        Sudah punya akun silahkan login <Link href="/auth/login">Login</Link>
+      </div>
     </Layout>
   )
 }

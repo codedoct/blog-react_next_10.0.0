@@ -10,8 +10,8 @@ const reducer = (state = {}, action) => {
     return { ...state, status: action.status, data: action.payload }
   case 'LOGOUT_USER':
     return { ...state, status: action.status, data: action.payload }
-  case 'TICK':
-    return {...state, data: action.payload}
+  // case 'TICK':
+  //   return {...state, data: action.payload}
   default:
     return state
   }
