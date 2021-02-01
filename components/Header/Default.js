@@ -5,6 +5,7 @@ import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import MenuIcon from '@material-ui/icons/Menu'
 import IconButton from '@material-ui/core/IconButton'
+import { useRouter } from 'next/router'
 
 const drawerWidth = 240
 
@@ -32,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const HeaderDefault = ({handleDrawerOpen, open}) => {
+  const router = useRouter()
   const classes = useStyles()
 
   return (
@@ -42,7 +44,7 @@ const HeaderDefault = ({handleDrawerOpen, open}) => {
       })}
     >
       <Toolbar>
-        <Typography variant="h6" noWrap className={classes.title}>
+        <Typography variant="h6" noWrap className={classes.title} onClick={() => router.push("/")}>
           Codedoct - React NextJS
         </Typography>
         <IconButton
