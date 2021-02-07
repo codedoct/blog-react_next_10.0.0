@@ -5,14 +5,17 @@ import {
 } from '@material-ui/core'
 import { useForm, Controller } from 'react-hook-form'
 import { regexEmail } from '~/utils/regex'
-import { connect } from 'react-redux'
 // import { useRouter } from 'next/router'
 import { loginUser } from "~/store/actions/auth"
 
-const Form = ({dispatch}) => {
+const Form = () => {
   // const router = useRouter()
   const { handleSubmit, errors, control } = useForm() // initialize the hook
   const [isLoading, setIsLoading] = React.useState(false)
+  const [openAlert, setOpenAlert] = React.useState({
+    status: false,
+    message: null
+  })
 
   const onSubmit = async (value) => {
     setIsLoading(true)
@@ -21,16 +24,17 @@ const Form = ({dispatch}) => {
         email: value.email,
         password: value.password
       }
-      await dispatch(loginUser(data))
+      await loginUser(data)
       setIsLoading(false)
     } catch (error) {
-      console.log(error.response)
+      setOpenAlert({status:true, message:error.data.message})
       setIsLoading(false)
     }
   }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
+      {openAlert.status && <span className="error-form">{openAlert.message}</span>}
       <div className="mt-1">
         <Controller
           name="email"
@@ -59,4 +63,4 @@ const Form = ({dispatch}) => {
   )
 }
 
-export default connect(state => state)(Form)
+export default Form
