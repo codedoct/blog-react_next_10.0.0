@@ -8,7 +8,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
-import PersonIcon from '@material-ui/icons/Person'
+import { Person, Subject } from '@material-ui/icons'
 import { useRouter } from 'next/router'
 
 const drawerWidth = 240
@@ -54,8 +54,16 @@ const GlobalDrawer = ({handleDrawerClose, open}) => {
       <Divider />
       <List>
         <ListItem button onClick={() => router.push("/auth/login")}>
-          <ListItemIcon><PersonIcon /></ListItemIcon>
+          <ListItemIcon><Person /></ListItemIcon>
           <ListItemText primary="Login" />
+        </ListItem>
+        <ListItem button onClick={() => router.push("/news")}>
+          <ListItemIcon><Subject /></ListItemIcon>
+          <ListItemText primary="News" />
+        </ListItem>
+        <ListItem button onClick={() => router.push("/news-withredux")}>
+          <ListItemIcon><Subject /></ListItemIcon>
+          <ListItemText primary="News With Redux" />
         </ListItem>
       </List>
     </Drawer>
