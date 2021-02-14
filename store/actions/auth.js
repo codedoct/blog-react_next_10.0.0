@@ -1,5 +1,6 @@
 import { API_AUTH } from '~/utils/api-url'
 import { apiPostNonAuth } from '~/utils/api'
+import { setCookie } from '~/utils/auth'
 
 export const registerUser = async (data) => {
   try {
@@ -11,7 +12,9 @@ export const registerUser = async (data) => {
 
 export const loginUser = async (data) => {
   try {
-    await apiPostNonAuth(API_AUTH.LOGIN, data)
+    const response = await apiPostNonAuth(API_AUTH.LOGIN, data)
+    const token = response.data.token.split(" ")[1]
+    setCookie('token_react_next', token, 30)
   } catch (error) {
     throw error.response
   }
