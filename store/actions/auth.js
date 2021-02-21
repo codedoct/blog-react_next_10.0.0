@@ -14,7 +14,7 @@ export const loginUser = async (data) => {
   try {
     const response = await apiPostNonAuth(API_AUTH.LOGIN, data)
     const token = response.data.token.split(" ")[1]
-    setCookie('token_react_next', token, 30)
+    setCookie(token, 30)
   } catch (error) {
     throw error.response
   }

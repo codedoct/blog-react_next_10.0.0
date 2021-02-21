@@ -7,6 +7,7 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import theme from '../styles/theme'
 import '../styles/globals.scss'
 import PropTypes from 'prop-types'
+import { isLogin } from '~/utils/auth'
 
 const MyApp = ({ Component, pageProps }) => {
   React.useEffect(() => {
@@ -37,6 +38,22 @@ MyApp.getInitialProps = async ({Component, ctx}) => {
   const pageProps = Component.getInitialProps
     ? await Component.getInitialProps(ctx)
     : {}
+  
+  if (!isLogin) {
+    if (ctx.pathname == "/" || ctx.pathname == "/auth/login" || ctx.pathname == "/auth/register") {
+      return { pageProps }
+    } else {
+      ctx.res.writeHead(301, { Location: '/auth/login' })
+      ctx.res.end()
+    }
+  } else {
+    if (ctx.pathname == "/" || ctx.pathname == "/auth/login" || ctx.pathname == "/auth/register")  {
+      ctx.res.writeHead(301, { Location: '/dashboard' })
+      ctx.res.end()
+    } else {
+      return { pageProps }
+    }
+  }
 
   return { pageProps }
 }

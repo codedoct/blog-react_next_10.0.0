@@ -7,4 +7,4 @@ import reducer from "./reducers"
 const makeStore = () => createStore(reducer, applyMiddleware(thunk))
 
 // export an assembled wrapper
-export const wrapper = createWrapper(makeStore, {debug: true})
+export const wrapper = createWrapper(makeStore, {debug: false})
