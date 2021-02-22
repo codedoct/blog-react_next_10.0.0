@@ -5,11 +5,9 @@ import {
 } from '@material-ui/core'
 import { useForm, Controller } from 'react-hook-form'
 import { regexEmail } from '~/utils/regex'
-import { useRouter } from 'next/router'
 import { loginUser } from "~/store/actions/auth"
 
 const Form = () => {
-  const router = useRouter()
   const { handleSubmit, errors, control } = useForm() // initialize the hook
   const [isLoading, setIsLoading] = React.useState(false)
   const [openAlert, setOpenAlert] = React.useState({
@@ -25,10 +23,11 @@ const Form = () => {
         password: value.password
       }
       await loginUser(data)
-      router.go(0)
+      location.reload()
       setIsLoading(false)
     } catch (error) {
-      setOpenAlert({status:true, message:error.data.message})
+      console.log(error)
+      error.data && setOpenAlert({status:true, message:error.data.message})
       setIsLoading(false)
     }
   }

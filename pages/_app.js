@@ -7,7 +7,8 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import theme from '../styles/theme'
 import '../styles/globals.scss'
 import PropTypes from 'prop-types'
-import { isLogin } from '~/utils/auth'
+import { isLoginServer } from '~/utils/auth'
+import { redirectTo } from '~/utils/handling-url'
 
 const MyApp = ({ Component, pageProps }) => {
   React.useEffect(() => {
@@ -38,18 +39,16 @@ MyApp.getInitialProps = async ({Component, ctx}) => {
   const pageProps = Component.getInitialProps
     ? await Component.getInitialProps(ctx)
     : {}
-  
-  if (!isLogin) {
+
+  if (!isLoginServer(ctx.req)) {
     if (ctx.pathname == "/" || ctx.pathname == "/auth/login" || ctx.pathname == "/auth/register") {
       return { pageProps }
     } else {
-      ctx.res.writeHead(301, { Location: '/auth/login' })
-      ctx.res.end()
+      redirectTo('/auth/login', { res: ctx.res, status: 301 })
     }
   } else {
     if (ctx.pathname == "/" || ctx.pathname == "/auth/login" || ctx.pathname == "/auth/register")  {
-      ctx.res.writeHead(301, { Location: '/dashboard' })
-      ctx.res.end()
+      redirectTo('/dashboard', { res: ctx.res, status: 301 })
     } else {
       return { pageProps }
     }
