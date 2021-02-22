@@ -1,6 +1,6 @@
 import { API_AUTH } from '~/utils/api-url'
-import { apiPostNonAuth } from '~/utils/api'
-import { setCookie } from '~/utils/auth'
+import { apiPostNonAuth, apiPostAuth } from '~/utils/api'
+import { setCookie, removeCookie } from '~/utils/auth'
 
 export const registerUser = async (data) => {
   try {
@@ -17,5 +17,14 @@ export const loginUser = async (data) => {
     setCookie(token, 30)
   } catch (error) {
     throw error.response
+  }
+}
+
+export const logoutUser = async () => {
+  try {
+    await apiPostAuth(API_AUTH.LOGOUT)
+    removeCookie()
+  } catch (error) {
+    console.log(error)
   }
 }

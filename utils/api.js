@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { METHOD } from './constant'
+import { getUserToken } from '~/utils/auth'
 
 export const apiGetNonAuth = (URL, params) => axios({
   url: URL,
@@ -11,7 +12,7 @@ export const apiGetAuth = (URL, params) => axios({
   method: METHOD.GET,
   params,
   headers: {
-    Authorization: ''
+    Authorization: `Bearer ${getUserToken()}`
   }
 })
 
@@ -25,7 +26,7 @@ export const apiPostAuth = (URL, data) => axios({
   method: METHOD.POST,
   data,
   headers: {
-    Authorization: ''
+    Authorization: `Bearer ${getUserToken()}`
   }
 })
 
@@ -34,7 +35,7 @@ export const apiPatchAuth = (URL, data) => axios({
   method: METHOD.PATCH,
   data,
   headers: {
-    Authorization: ''
+    Authorization: `Bearer ${getUserToken()}`
   }
 })
 
@@ -43,7 +44,7 @@ export const apiPutAuth = (URL, data) => axios({
   method: METHOD.PUT,
   data,
   headers: {
-    Authorization: ''
+    Authorization: `Bearer ${getUserToken()}`
   }
 })
 
@@ -52,6 +53,6 @@ export const apiDeleteAuth = (URL, data) => axios({
   method: METHOD.DELETE,
   data,
   headers: {
-    Authorization: ''
+    Authorization: `Bearer ${getUserToken()}`
   }
 })

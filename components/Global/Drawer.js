@@ -10,6 +10,8 @@ import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import { Person, Subject } from '@material-ui/icons'
 import { useRouter } from 'next/router'
+import { isLoginClient } from '~/utils/auth'
+import { logoutUser } from "~/store/actions/auth"
 
 const drawerWidth = 240
 
@@ -36,6 +38,11 @@ const GlobalDrawer = ({handleDrawerClose, open}) => {
   const classes = useStyles()
   const theme = useTheme()
 
+  const handleLogoutUser = async () => {
+    await logoutUser()
+    location.reload()
+  }
+  
   return (
     <Drawer
       className={classes.drawer}
@@ -53,10 +60,17 @@ const GlobalDrawer = ({handleDrawerClose, open}) => {
       </div>
       <Divider />
       <List>
-        <ListItem button onClick={() => router.push("/auth/login")}>
-          <ListItemIcon><Person /></ListItemIcon>
-          <ListItemText primary="Login" />
-        </ListItem>
+        { isLoginClient() ? (
+          <ListItem button onClick={handleLogoutUser}>
+            <ListItemIcon><Person /></ListItemIcon>
+            Logout
+          </ListItem>
+        ) : (
+          <ListItem button onClick={() => router.push("/auth/login")}>
+            <ListItemIcon><Person /></ListItemIcon>
+            Login
+          </ListItem>
+        )} 
         <ListItem button onClick={() => router.push("/news")}>
           <ListItemIcon><Subject /></ListItemIcon>
           <ListItemText primary="News" />
