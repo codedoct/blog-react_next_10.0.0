@@ -1,3 +1,4 @@
+import React from 'react'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import Drawer from '@material-ui/core/Drawer'
 import List from '@material-ui/core/List'
@@ -7,7 +8,6 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
-import ListItemText from '@material-ui/core/ListItemText'
 import { Person, Subject } from '@material-ui/icons'
 import { useRouter } from 'next/router'
 import { isLoginClient } from '~/utils/auth'
@@ -37,6 +37,9 @@ const GlobalDrawer = ({handleDrawerClose, open}) => {
   const router = useRouter()
   const classes = useStyles()
   const theme = useTheme()
+  const [isRender, setIsRender] = React.useState(false)
+
+  React.useEffect(() => { setIsRender(true) }, [])
 
   const handleLogoutUser = async () => {
     await logoutUser()
@@ -60,7 +63,7 @@ const GlobalDrawer = ({handleDrawerClose, open}) => {
       </div>
       <Divider />
       <List>
-        { isLoginClient() ? (
+        {isRender && (isLoginClient() ? (
           <ListItem button onClick={handleLogoutUser}>
             <ListItemIcon><Person /></ListItemIcon>
             Logout
@@ -70,14 +73,14 @@ const GlobalDrawer = ({handleDrawerClose, open}) => {
             <ListItemIcon><Person /></ListItemIcon>
             Login
           </ListItem>
-        )} 
+        ))}
         <ListItem button onClick={() => router.push("/news")}>
           <ListItemIcon><Subject /></ListItemIcon>
-          <ListItemText primary="News" />
+          News
         </ListItem>
         <ListItem button onClick={() => router.push("/news-withredux")}>
           <ListItemIcon><Subject /></ListItemIcon>
-          <ListItemText primary="News With Redux" />
+          News With Redux
         </ListItem>
       </List>
     </Drawer>

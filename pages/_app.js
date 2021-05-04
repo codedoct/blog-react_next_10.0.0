@@ -40,17 +40,19 @@ MyApp.getInitialProps = async ({Component, ctx}) => {
     ? await Component.getInitialProps(ctx)
     : {}
 
-  if (!isLoginServer(ctx.req)) {
-    if (ctx.pathname == "/" || ctx.pathname == "/auth/login" || ctx.pathname == "/auth/register") {
-      return { pageProps }
+  if (ctx.req) {
+    if (!isLoginServer(ctx.req)) {
+      if (ctx.pathname == "/" || ctx.pathname == "/auth/login" || ctx.pathname == "/auth/register") {
+        return { pageProps }
+      } else {
+        redirectTo('/auth/login', { res: ctx.res, status: 301 })
+      }
     } else {
-      redirectTo('/auth/login', { res: ctx.res, status: 301 })
-    }
-  } else {
-    if (ctx.pathname == "/" || ctx.pathname == "/auth/login" || ctx.pathname == "/auth/register")  {
-      redirectTo('/dashboard', { res: ctx.res, status: 301 })
-    } else {
-      return { pageProps }
+      if (ctx.pathname == "/" || ctx.pathname == "/auth/login" || ctx.pathname == "/auth/register")  {
+        redirectTo('/dashboard', { res: ctx.res, status: 301 })
+      } else {
+        return { pageProps }
+      }
     }
   }
 
